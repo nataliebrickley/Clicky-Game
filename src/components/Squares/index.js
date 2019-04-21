@@ -8,7 +8,7 @@ function Squares(props) {
             <div className="col-md-2">
                 <img alt={props.name} src={props.image} data-clicked={props.clicked} onClick={()=> {
                     props.shuffle()
-                    props.handleScore();
+                    props.handleScore(props.id);
                     }}/>
             </div>
     

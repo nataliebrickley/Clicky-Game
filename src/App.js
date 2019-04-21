@@ -6,35 +6,63 @@ class App extends React.Component {
     state = {
         characters,
         score: 0,
-        topscore: 0
+        topscore: 0,
+        status: "playing"
     };
-shuffle = () => {
-    var shuffledarray = this.state.characters
-    var currentIndex = shuffledarray.length;
-	var temporaryValue, randomIndex;
+    shuffle = () => {
+        var shuffledarray = this.state.characters
+        var currentIndex = shuffledarray.length;
+        var temporaryValue, randomIndex;
 
-	// While there remain elements to shuffle...
-	while (0 !== currentIndex) {
-		// Pick a remaining element...
-		randomIndex = Math.floor(Math.random() * currentIndex);
-		currentIndex -= 1;
+        // While there remain elements to shuffle...
+        while (0 !== currentIndex) {
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
 
-		// And swap it with the current element.
-		temporaryValue = shuffledarray[currentIndex];
-		shuffledarray[currentIndex] = shuffledarray[randomIndex];
-		shuffledarray[randomIndex] = temporaryValue;
+            // And swap it with the current element.
+            temporaryValue = shuffledarray[currentIndex];
+            shuffledarray[currentIndex] = shuffledarray[randomIndex];
+            shuffledarray[randomIndex] = temporaryValue;
+        }
+        //console.log(this.state.characters)
+        this.setState({ characters: shuffledarray })
+        return shuffledarray;
     }
-    //console.log(this.state.characters)
-    this.setState({characters: shuffledarray})
-    return shuffledarray; 
-}
-handleScore = () => {
-    this.setState({score: this.state.score + 1})
-}
+    handleScore = (id) => {
+        this.state.characters.map(character => {
+            if (character.id === id) {
+                if (!character.clicked) {
+                    character.clicked = true
+                    this.setState({ score: this.state.score + 1 })
+                }
+                else {
+                    //manage topscore
+                    if(this.state.score>this.state.topscore){
+                        this.setState({topscore: this.state.score})
+                    }
+                    //reset score
+                    this.setState({score: 0})
+                    //reset all clicked values to false:
+                    this.resetClicked();
+                }
+            }
+        
+            return character.clicked
+        })
+
+    }
+    resetClicked = () => {
+        this.state.characters.map(character => {
+            character.clicked = false
+            return character
+        }
+        )
+    }
     render() {
         return (
             <div>
-                <Score 
+                <Score
                     score={this.state.score}
                     topscore={this.state.topscore}
                 />
@@ -44,6 +72,7 @@ handleScore = () => {
                         <div className="col-md-2"></div>
                         {this.state.characters.filter(character => this.state.characters.indexOf(character) <= 3).map(character => (
                             <Squares
+                                id={character.id}
                                 name={character.name}
                                 image={character.image}
                                 clicked={character.clicked}
@@ -56,6 +85,7 @@ handleScore = () => {
                         <div className="col-md-2"></div>
                         {this.state.characters.filter(character => 3 < this.state.characters.indexOf(character) && this.state.characters.indexOf(character) <= 7).map(character => (
                             <Squares
+                                id={character.id}
                                 name={character.name}
                                 image={character.image}
                                 clicked={character.clicked}
@@ -68,6 +98,7 @@ handleScore = () => {
                         <div className="col-md-2"></div>
                         {this.state.characters.filter(character => 7 < this.state.characters.indexOf(character)).map(character => (
                             <Squares
+                                id={character.id}
                                 name={character.name}
                                 image={character.image}
                                 clicked={character.clicked}

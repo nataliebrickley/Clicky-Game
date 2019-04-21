@@ -23,11 +23,13 @@ shuffle = () => {
 		temporaryValue = shuffledarray[currentIndex];
 		shuffledarray[currentIndex] = shuffledarray[randomIndex];
 		shuffledarray[randomIndex] = temporaryValue;
-	}
-    console.log(this.state.characters)
+    }
+    //console.log(this.state.characters)
     this.setState({characters: shuffledarray})
-    return shuffledarray;
-    
+    return shuffledarray; 
+}
+handleScore = () => {
+    this.setState({score: this.state.score + 1})
 }
     render() {
         return (
@@ -44,7 +46,9 @@ shuffle = () => {
                             <Squares
                                 name={character.name}
                                 image={character.image}
+                                clicked={character.clicked}
                                 shuffle={this.shuffle}
+                                handleScore={this.handleScore}
                             />
                         ))}
                     </div>
@@ -54,7 +58,9 @@ shuffle = () => {
                             <Squares
                                 name={character.name}
                                 image={character.image}
+                                clicked={character.clicked}
                                 shuffle={this.shuffle}
+                                handleScore={this.handleScore}
                             />
                         ))}
                     </div>
@@ -64,7 +70,9 @@ shuffle = () => {
                             <Squares
                                 name={character.name}
                                 image={character.image}
+                                clicked={character.clicked}
                                 shuffle={this.shuffle}
+                                handleScore={this.handleScore}
                             />
                         ))}
                     </div>

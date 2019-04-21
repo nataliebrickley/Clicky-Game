@@ -1,15 +1,22 @@
 import React from "react";
 import Squares from "./components/Squares/index"
+import Score from "./components/Score/index"
 import characters from "./characters.json"
 class App extends React.Component {
     state = {
-        characters
+        characters,
+        score: 0,
+        topscore: 0
     };
 
     render() {
         return (
             <div>
-                <h1 className="text-center">Clicky Game</h1>
+                <Score 
+                    score={this.state.score}
+                    topscore={this.state.topscore}
+                />
+                <h1 className="text-center title">Clicky Kitties</h1>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-md-2"></div>

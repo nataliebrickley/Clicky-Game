@@ -9,10 +9,10 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>Clicky Game</h1>
+                <h1 className="text-center">Clicky Game</h1>
                 <div className="container-fluid">
                     <div className="row">
-                    <div className="col-md-2"></div>
+                        <div className="col-md-2"></div>
                         {this.state.characters.filter(character => character.id <= 4).map(character => (
                             <Squares
                                 name={character.name}
@@ -21,7 +21,7 @@ class App extends React.Component {
                         ))}
                     </div>
                     <div className="row">
-                    <div className="col-md-2"></div>
+                        <div className="col-md-2"></div>
                         {this.state.characters.filter(character => 4 < character.id && character.id <= 8).map(character => (
                             <Squares
                                 name={character.name}
@@ -30,8 +30,8 @@ class App extends React.Component {
                         ))}
                     </div>
                     <div className="row">
-                    <div className="col-md-2"></div>
-                        {this.state.characters.filter(character => character.id <= 4).map(character => (
+                        <div className="col-md-2"></div>
+                        {this.state.characters.filter(character => 8 < character.id).map(character => (
                             <Squares
                                 name={character.name}
                                 image={character.image}

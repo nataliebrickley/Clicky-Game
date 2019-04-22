@@ -2,13 +2,24 @@
     background: darkred;
     color: goldenrod;
     height: auto;
+    
 }
 .title {
     font-size: 48px;
 }
-.text {
+.gold {
     font-size: 24px;
 }
 .score {
     font-size: 24px;
+}
+.green {
+    color: green;
+    font-size: 36px;
+    font-weight: bold;
+}
+.red {
+    color: red;
+    font-size: 36px;
+    font-weight: bold;
 }

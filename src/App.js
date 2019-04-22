@@ -7,7 +7,8 @@ class App extends React.Component {
         characters,
         score: 0,
         topscore: 0,
-        status: "playing"
+        navtext: "Click on an image to earn points, but don't click on an image more than once!",
+        navclass: "gold"
     };
     shuffle = () => {
         var shuffledarray = this.state.characters
@@ -32,17 +33,18 @@ class App extends React.Component {
     handleScore = (id) => {
         this.state.characters.map(character => {
             if (character.id === id) {
+                //if the image has not been clicked...change clicked to true, update score
                 if (!character.clicked) {
                     character.clicked = true
-                    this.setState({ score: this.state.score + 1 })
+                    this.setState({ score: this.state.score + 1 , navtext: "Correct!", navclass: "green"})
                 }
                 else {
                     //manage topscore
                     if(this.state.score>this.state.topscore){
                         this.setState({topscore: this.state.score})
                     }
-                    //reset score
-                    this.setState({score: 0})
+                    //reset score & change navtext
+                    this.setState({score: 0, navtext: "Incorrect! You lose!", navclass: "red"})
                     //reset all clicked values to false:
                     this.resetClicked();
                 }
@@ -65,6 +67,8 @@ class App extends React.Component {
                 <Score
                     score={this.state.score}
                     topscore={this.state.topscore}
+                    navtext={this.state.navtext}
+                    navclass={this.state.navclass}
                 />
                 <div className="container-fluid grid">
                     <div className="row">

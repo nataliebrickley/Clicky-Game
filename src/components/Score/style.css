@@ -1,4 +1,14 @@
 .navbar {
     background: darkred;
     color: goldenrod;
+    height: auto;
+}
+.title {
+    font-size: 48px;
+}
+.text {
+    font-size: 24px;
+}
+.score {
+    font-size: 24px;
 }

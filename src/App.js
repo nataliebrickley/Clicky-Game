@@ -66,8 +66,7 @@ class App extends React.Component {
                     score={this.state.score}
                     topscore={this.state.topscore}
                 />
-                <h1 className="text-center title">Clicky Kitties</h1>
-                <div className="container-fluid">
+                <div className="container-fluid grid">
                     <div className="row">
                         <div className="col-md-2"></div>
                         {this.state.characters.filter(character => this.state.characters.indexOf(character) <= 3).map(character => (

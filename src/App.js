@@ -1,6 +1,7 @@
 import React from "react";
 import Squares from "./components/Squares/index"
 import Score from "./components/Score/index"
+import Modal from "./components/Modal/index"
 import characters from "./characters.json"
 class App extends React.Component {
     state = {
@@ -8,7 +9,8 @@ class App extends React.Component {
         score: 0,
         topscore: 0,
         navtext: "Click on an image to earn points, but don't click on an image more than once!",
-        navclass: "gold"
+        navclass: "gold",
+        showModal: false
     };
     shuffle = () => {
         var shuffledarray = this.state.characters
@@ -36,20 +38,22 @@ class App extends React.Component {
                 //if the image has not been clicked...change clicked to true, update score
                 if (!character.clicked) {
                     character.clicked = true
-                    this.setState({ score: this.state.score + 1 , navtext: "Correct!", navclass: "green"})
+                    this.setState({ score: this.state.score + 1, navtext: "Correct!", navclass: "green" })
                 }
                 else {
+                    //show modal
+                    this.setState({ showModal: true })
                     //manage topscore
-                    if(this.state.score>this.state.topscore){
-                        this.setState({topscore: this.state.score})
+                    if (this.state.score > this.state.topscore) {
+                        this.setState({ topscore: this.state.score })
                     }
                     //reset score & change navtext
-                    this.setState({score: 0, navtext: "Incorrect! You lose!", navclass: "red"})
+                    this.setState({ score: 0, navtext: "Incorrect! You lose!", navclass: "red" })
                     //reset all clicked values to false:
                     this.resetClicked();
                 }
             }
-        
+
             return character.clicked
         })
 
@@ -60,6 +64,9 @@ class App extends React.Component {
             return character
         }
         )
+    }
+    showModal = () => {
+
     }
     render() {
         return (
@@ -111,6 +118,14 @@ class App extends React.Component {
                         ))}
                     </div>
                 </div>
+                <Modal
+                    showModal={this.state.showModal}
+                    onClose={(e) => this.setState({ showModal: false, navtext: "Click on an image to earn points, but don't click on an image more than once!", navclass: "gold" })}>
+                    <div>
+                        <h1>Sorry! You Lost!</h1>
+                        <img src="https://i.dailymail.co.uk/i/pix/2014/04/11/article-2602528-1D06B2F200000578-824_634x475.jpg" alt="sad cat"/>
+                    </div>
+                </Modal>
             </div>
         )
     }

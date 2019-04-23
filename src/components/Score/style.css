@@ -7,19 +7,22 @@
 .title {
     font-size: 48px;
 }
-.gold {
+.gold, .score {
     font-size: 24px;
 }
-.score {
-    font-size: 24px;
+.green, .red, .blue, .yellow {
+    font-size: 36px;
+    font-weight: bold;
 }
 .green {
     color: green;
-    font-size: 36px;
-    font-weight: bold;
+}
+.blue {
+    color: blue;
+}
+.yellow{
+    color: yellow;
 }
 .red {
     color: red;
-    font-size: 36px;
-    font-weight: bold;
 }

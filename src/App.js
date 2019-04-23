@@ -10,6 +10,7 @@ class App extends React.Component {
         topscore: 0,
         navtext: "Click on an image to earn points, but don't click on an image more than once!",
         navclass: "gold",
+        correct: 0,
         showModal: false
     };
     shuffle = () => {
@@ -38,7 +39,11 @@ class App extends React.Component {
                 //if the image has not been clicked...change clicked to true, update score
                 if (!character.clicked) {
                     character.clicked = true
-                    this.setState({ score: this.state.score + 1, navtext: "Correct!", navclass: "green" })
+                    this.setState({ 
+                        score: this.state.score + 1, 
+                        navtext: "Correct!", 
+                        correct: this.state.correct + 1})
+                    this.handleColor()
                 }
                 else {
                     //show modal
@@ -65,8 +70,20 @@ class App extends React.Component {
         }
         )
     }
-    showModal = () => {
-
+    handleColor = () => {
+        switch(this.state.correct % 3) {
+            case 0: this.setState({navclass: "green"})
+            break;
+            case 1: this.setState({navclass: "blue"})
+            break;
+            default: this.setState({navclass: "yellow"})
+        }
+    }
+    onClose = () => {
+        this.setState({ 
+            showModal: false, 
+            navtext: "Click on an image to earn points, but don't click on an image more than once!", 
+            navclass: "gold" })
     }
     render() {
         return (
@@ -120,7 +137,7 @@ class App extends React.Component {
                 </div>
                 <Modal
                     showModal={this.state.showModal}
-                    onClose={(e) => this.setState({ showModal: false, navtext: "Click on an image to earn points, but don't click on an image more than once!", navclass: "gold" })}>
+                    onClose={this.onClose}>
                     <div>
                         <h1>Sorry! You Lost!</h1>
                         <img src="https://i.dailymail.co.uk/i/pix/2014/04/11/article-2602528-1D06B2F200000578-824_634x475.jpg" alt="sad cat"/>

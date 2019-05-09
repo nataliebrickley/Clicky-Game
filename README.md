@@ -5,7 +5,7 @@ Clickity Cat is a memory game created with React. The object of the game is to c
   
 [![Image from Gyazo](https://i.gyazo.com/ca19ec3a2880bba972dfa9ab5ee26688.gif)](https://gyazo.com/ca19ec3a2880bba972dfa9ab5ee26688) 
 
-### Think you can make it to the end? Put your memory to the test and play Clickity Cat now!
+Think you can make it to the end? Put your memory to the test and play Clickity Cat now!
 
 ## Technologies  
 The following were used to create this application: React, Bootstrap, JSON
